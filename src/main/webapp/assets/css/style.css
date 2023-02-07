@@ -1,0 +1,20 @@
+thead {
+    background-color: #0fab13;
+    color: #fff;
+}
+
+footer {
+    padding-top: 10px;
+    background-color: #ae1111;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+}
+
+footer ul.container {
+    padding: 0 0 10px 28px;
+}
+
+footer ul.container li {
+    font-weight: 600;
+}

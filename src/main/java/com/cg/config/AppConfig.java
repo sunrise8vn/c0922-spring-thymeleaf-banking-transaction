@@ -1,6 +1,8 @@
 package com.cg.config;
 
 
+import com.cg.service.customer.CustomerServiceImpl;
+import com.cg.service.customer.ICustomerService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -46,6 +48,11 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
         this.applicationContext = applicationContext;
     }
 
+
+//    @Bean
+//    public ICustomerService customerService() {
+//        return new CustomerServiceImpl();
+//    }
 
     //Cấu hình Thymeleaf
     @Bean

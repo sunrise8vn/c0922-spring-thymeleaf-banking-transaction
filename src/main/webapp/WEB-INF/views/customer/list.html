@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of customers</title>
+    <link rel="stylesheet" href="/assets/bootstrap/v5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <nav class="navbar bg-primary">
+                <div class="container-fluid">
+                    <a class="navbar-brand">List of customers</a>
+                    <div class="d-flex">
+                        <a href="/customers/create">
+                            <button class="btn btn-light">Create</button>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Full name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Balance</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each="item : ${customers}">
+                        <tr>
+                            <td th:text="${item.id}"></td>
+                            <td th:text="${item.fullName}"></td>
+                            <td th:text="${item.email}"></td>
+                            <td th:text="${item.phone}"></td>
+                            <td th:text="${item.balance}"></td>
+                            <td th:text="${item.address}"></td>
+                            <td>
+                                <a th:href="@{/customers/update/__${item.id}__}">
+                                    <button class="btn btn-outline-secondary">
+                                        Edit
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+
+        </div>
+    </div>
+</body>
+</html>
