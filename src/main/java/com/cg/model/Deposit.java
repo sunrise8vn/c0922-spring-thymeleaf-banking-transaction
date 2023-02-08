@@ -26,8 +26,8 @@ public class Deposit {
     @Column(name = "created_by")
     private String createdBy;
 
-    @Column(nullable = false, columnDefinition = "BIT default 0")
-    private Boolean deleted;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean deleted = false;
 
     public Deposit() {
     }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deposit</title>
+    <link rel="stylesheet" href="/assets/bootstrap/v5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <nav class="navbar bg-primary">
+                <div class="container-fluid">
+                    <a class="navbar-brand">Deposit</a>
+                    <div class="d-flex">
+                        <a href="/customers">
+                            <button class="btn btn-light">List of customers</button>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="content">
+            <th:block th:if="${error != true}">
+                <form class="" method="post" th:object="${deposit}">
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label class="form-label">Full name</label>
+                            <input type="text" class="form-control" th:field="*{customer.fullName}" readonly />
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" th:field="*{customer.email}" readonly />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="mb-3 col-lg-6">
+                            <label class="form-label">Balance</label>
+                            <input type="number" class="form-control" th:field="*{customer.balance}" readonly />
+                        </div>
+                        <div class="mb-3 col-lg-6">
+                            <label class="form-label">Transaction Amount</label>
+                            <input type="text" class="form-control" th:field="*{transactionAmount}" />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="mb-3 col-lg-3">
+                            <button type="submit" class="btn btn-outline-success">Deposit</button>
+                        </div>
+                    </div>
+                </form>
+            </th:block>
+        </div>
+    </div>
+
+    <footer class="container-fluid">
+        <th:block th:if="${success == true}">
+            <div class="success">
+                <ul class="container">
+                    <li th:text="${messages}"></li>
+                </ul>
+            </div>
+        </th:block>
+
+        <th:block th:if="${error == true}">
+            <div class="error">
+                <ul class="container">
+                    <li th:text="${messages}"></li>
+                </ul>
+            </div>
+        </th:block>
+
+
+    </footer>
+
+</body>
+</html>

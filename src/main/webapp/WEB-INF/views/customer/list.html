@@ -31,7 +31,7 @@
                         <th>Phone</th>
                         <th>Balance</th>
                         <th>Address</th>
-                        <th>Action</th>
+                        <th colspan="2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,6 +47,13 @@
                                 <a th:href="@{/customers/update/__${item.id}__}">
                                     <button class="btn btn-outline-secondary">
                                         Edit
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/customers/deposit/__${item.id}__}">
+                                    <button class="btn btn-outline-success">
+                                        Deposit
                                     </button>
                                 </a>
                             </td>
