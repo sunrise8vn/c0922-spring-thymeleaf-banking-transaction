@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "customers")
-public class Customer implements Validator {
+public class Customer extends BaseEntity implements Validator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,20 +31,16 @@ public class Customer implements Validator {
     private String address;
 
 
-    @Column(columnDefinition = "boolean default false")
-    private Boolean deleted = false;
-
     public Customer() {
     }
 
-    public Customer(Long id, String fullName, String email, String phone, BigDecimal balance, String address, Boolean deleted) {
+    public Customer(Long id, String fullName, String email, String phone, BigDecimal balance, String address) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
         this.balance = balance;
         this.address = address;
-        this.deleted = deleted;
     }
 
     public Long getId() {
@@ -95,13 +91,6 @@ public class Customer implements Validator {
         this.address = address;
     }
 
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
 
     @Override
     public boolean supports(Class<?> clazz) {

@@ -1,5 +1,8 @@
 package com.cg.model;
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -7,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "transfers")
-public class Transfer {
+public class Transfer extends BaseEntity implements Validator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,20 +35,11 @@ public class Transfer {
     @Column(name = "transaction_amount", precision = 10, scale = 0, nullable = false)
     private BigDecimal transactionAmount;
 
-    @Column(name = "created_at", nullable = false)
-    private Date createdAt;
-
-    @Column(name = "created_by")
-    private String createdBy;
-
-
-    @Column(nullable = false, columnDefinition = "BIT default 0")
-    private Boolean deleted;
 
     public Transfer() {
     }
 
-    public Transfer(Long id, Customer sender, Customer recipient, BigDecimal transferAmount, Long fees, BigDecimal feesAmount, BigDecimal transactionAmount, Date createdAt, String createdBy, Boolean deleted) {
+    public Transfer(Long id, Customer sender, Customer recipient, BigDecimal transferAmount, Long fees, BigDecimal feesAmount, BigDecimal transactionAmount) {
         this.id = id;
         this.sender = sender;
         this.recipient = recipient;
@@ -53,9 +47,6 @@ public class Transfer {
         this.fees = fees;
         this.feesAmount = feesAmount;
         this.transactionAmount = transactionAmount;
-        this.createdAt = createdAt;
-        this.createdBy = createdBy;
-        this.deleted = deleted;
     }
 
     public Long getId() {
@@ -114,27 +105,17 @@ public class Transfer {
         this.transactionAmount = transactionAmount;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+    @Override
+    public void validate(Object target, Errors errors) {
+        Transfer transfer = (Transfer) target;
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
+        BigDecimal transferAmount = transfer.getTransferAmount();
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
     }
 }

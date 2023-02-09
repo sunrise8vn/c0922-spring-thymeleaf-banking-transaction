@@ -1,13 +1,15 @@
 package com.cg.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
 
 @Entity
 @Table(name = "deposits")
-public class Deposit {
+public class Deposit extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,28 +19,19 @@ public class Deposit {
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private Customer customer;
 
+
+    @NotNull(message = "Transaction amount is required")
     @Column(name = "transaction_amount", precision = 10, scale = 0, nullable = false)
     private BigDecimal transactionAmount;
 
-    @Column(name = "created_at", nullable = false)
-    private Date createdAt;
-
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(columnDefinition = "boolean default false")
-    private Boolean deleted = false;
 
     public Deposit() {
     }
 
-    public Deposit(Long id, Customer customer, BigDecimal transactionAmount, Date createdAt, String createdBy, Boolean deleted) {
+    public Deposit(Long id, Customer customer, BigDecimal transactionAmount) {
         this.id = id;
         this.customer = customer;
         this.transactionAmount = transactionAmount;
-        this.createdAt = createdAt;
-        this.createdBy = createdBy;
-        this.deleted = deleted;
     }
 
     public Long getId() {
@@ -65,27 +58,5 @@ public class Deposit {
         this.transactionAmount = transactionAmount;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
 }

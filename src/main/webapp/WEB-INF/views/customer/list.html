@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>List of customers</title>
     <link rel="stylesheet" href="/assets/bootstrap/v5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/fontawesome/v5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
@@ -11,10 +12,13 @@
         <div class="header">
             <nav class="navbar bg-primary">
                 <div class="container-fluid">
-                    <a class="navbar-brand">List of customers</a>
+                    <h2>List of customers</h2>
                     <div class="d-flex">
                         <a href="/customers/create">
-                            <button class="btn btn-light">Create</button>
+                            <button class="btn btn-light">
+                                <i class="fas fa-plus"></i>
+                                Create
+                            </button>
                         </a>
                     </div>
                 </div>
@@ -31,7 +35,7 @@
                         <th>Phone</th>
                         <th>Balance</th>
                         <th>Address</th>
-                        <th colspan="2">Action</th>
+                        <th colspan="3">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,14 +50,21 @@
                             <td>
                                 <a th:href="@{/customers/update/__${item.id}__}">
                                     <button class="btn btn-outline-secondary">
-                                        Edit
+                                        <i class="far fa-edit"></i>
                                     </button>
                                 </a>
                             </td>
                             <td>
                                 <a th:href="@{/customers/deposit/__${item.id}__}">
                                     <button class="btn btn-outline-success">
-                                        Deposit
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/customers/transfer/__${item.id}__}">
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-exchange-alt"></i>
                                     </button>
                                 </a>
                             </td>

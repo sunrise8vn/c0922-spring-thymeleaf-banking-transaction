@@ -3,6 +3,10 @@ thead {
     color: #fff;
 }
 
+.header {
+    color: #fff;
+}
+
 footer {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -33,4 +37,5 @@ footer ul.container, footer .error h5 {
 
 footer ul.container li {
     font-weight: 600;
+    line-height: 40px;
 }

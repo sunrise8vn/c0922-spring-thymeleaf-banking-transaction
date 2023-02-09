@@ -2,8 +2,10 @@ package com.cg.service.customer;
 
 import com.cg.model.Customer;
 import com.cg.model.Deposit;
+import com.cg.model.Transfer;
 import com.cg.repository.CustomerRepository;
 import com.cg.repository.DepositRepository;
+import com.cg.repository.TransferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,9 @@ public class CustomerServiceImpl implements ICustomerService {
     @Autowired
     private DepositRepository depositRepository;
 
+    @Autowired
+    private TransferRepository transferRepository;
+
     @Override
     public List<Customer> findALl() {
         return customerRepository.findAll();
@@ -32,6 +37,16 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public List<Customer> findAllByDeletedIsFalse() {
         return customerRepository.findAllByDeletedIsFalse();
+    }
+
+    @Override
+    public List<Customer> findAllByIdNot(Long id) {
+        return customerRepository.findAllByIdNot(id);
+    }
+
+    @Override
+    public List<Customer> findAllByIdNotAndDeletedIsFalse(Long id) {
+        return customerRepository.findAllByIdNotAndDeletedIsFalse(id);
     }
 
     @Override
@@ -66,6 +81,24 @@ public class CustomerServiceImpl implements ICustomerService {
         deposit.setCustomer(customer);
 
         return deposit;
+    }
+
+    @Override
+    public Transfer transfer(Transfer transfer) {
+
+        BigDecimal transferAmount = transfer.getTransferAmount();
+        BigDecimal transactionAmount = transfer.getTransactionAmount();
+
+        customerRepository.decrementBalance(transfer.getSender().getId(), transactionAmount);
+
+        customerRepository.incrementBalance(transfer.getRecipient().getId(), transferAmount);
+
+        transferRepository.save(transfer);
+
+        Customer sender = customerRepository.findById(transfer.getSender().getId()).get();
+        transfer.setSender(sender);
+
+        return transfer;
     }
 
     @Override
